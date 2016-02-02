@@ -37,6 +37,10 @@ namespace JacobEbey.RobotCleaner
             this.robot.Moved += OnRobotMoved;
         }
 
+        /// <summary>
+        /// Calculate the number of positions the robot has visited.
+        /// </summary>
+        /// <returns>The number of unique positions visited.</returns>
         public int CalculatePositionsVisited()
         {
             lock (moves)
@@ -69,6 +73,12 @@ namespace JacobEbey.RobotCleaner
             }
         }
 
+        /// <summary>
+        /// Get points along the move command.
+        /// </summary>
+        /// <param name="currentPosition">The current position to move from.</param>
+        /// <param name="move">The direction to move.</param>
+        /// <returns>Enumerable of positions between the current position and the resulting position of a move command.</returns>
         IEnumerable<Vector2> PositionsAlongMove(Vector2 currentPosition, Vector2 move)
         {
             if (move.X != 0 && move.Y != 0) throw new Exception("Must only move in one direction at a time.");
@@ -101,6 +111,11 @@ namespace JacobEbey.RobotCleaner
             }
         }
 
+        /// <summary>
+        /// Executed when the robot has been issued a move command.
+        /// </summary>
+        /// <param name="sender">The sending robot.</param>
+        /// <param name="e">The event args of the robot move.</param>
         void OnRobotMoved(object sender, RobotMovedEventArgs e)
         {
             lock (moves)
