@@ -1,16 +1,18 @@
-﻿using JacobEbey.RobotCleaner.Math;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+using JacobEbey.RobotCleaner.Math;
 
 namespace JacobEbey.RobotCleaner.Tests
 {
+    /// <summary>
+    /// The test fixture for <see cref="JacobEbey.RobotCleaner.Robot"/>.
+    /// </summary>
     [TestClass]
     public class RobotTests
     {
+        /// <summary>
+        /// Verify that the robot's initial position is correct.
+        /// </summary>
         [TestMethod]
         public void TestRobotCreation()
         {
@@ -20,6 +22,9 @@ namespace JacobEbey.RobotCleaner.Tests
             Assert.AreEqual(11, robot.Position.Y);
         }
 
+        /// <summary>
+        /// Verify that the robot's move functionality works.
+        /// </summary>
         [TestMethod]
         public void TestRobotMove()
         {

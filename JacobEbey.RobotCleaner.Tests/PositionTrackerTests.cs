@@ -1,16 +1,19 @@
-﻿using JacobEbey.RobotCleaner.Math;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+using JacobEbey.RobotCleaner.Math;
 
 namespace JacobEbey.RobotCleaner.Tests
 {
+    /// <summary>
+    /// The test fixture for <see cref="JacobEbey.RobotCleaner.PositionTracker"/>.
+    /// </summary>
     [TestClass]
     public class PositionTrackerTests
     {
+        /// <summary>
+        /// Verify that the position tracker's initial calculation works for
+        /// <see cref="PositionTracker.CalculatePositionsVisited"/>.
+        /// </summary>
         [TestMethod]
         public void TestPositionTrackerCreation()
         {
@@ -20,6 +23,9 @@ namespace JacobEbey.RobotCleaner.Tests
             Assert.AreEqual(1, tracker.CalculatePositionsVisited());
         }
 
+        /// <summary>
+        /// Verify that starting in the positive grid works.
+        /// </summary>
         [TestMethod]
         public void TestPositionTrackerCalculationPositiveStart()
         {
@@ -34,6 +40,9 @@ namespace JacobEbey.RobotCleaner.Tests
             Assert.AreEqual(8, tracker.CalculatePositionsVisited());
         }
 
+        /// <summary>
+        /// Verify that starting in the negative grid works.
+        /// </summary>
         [TestMethod]
         public void TestPositionTrackerCalculationNegativeStart()
         {
@@ -48,6 +57,9 @@ namespace JacobEbey.RobotCleaner.Tests
             Assert.AreEqual(8, tracker.CalculatePositionsVisited());
         }
 
+        /// <summary>
+        /// Verify that retracing your steps calculates the correct value.
+        /// </summary>
         [TestMethod]
         public void TestRetraceSteps()
         {

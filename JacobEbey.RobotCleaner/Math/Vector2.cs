@@ -32,11 +32,10 @@ namespace JacobEbey.RobotCleaner.Math
         /// </summary>
         public int Y { get; set; }
 
-        public override int GetHashCode()
-        {
-            return ToString().GetHashCode();
-        }
-
+        /// <summary>
+        /// See <see cref="object.ToString"/>.
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return $"({X},{Y})";
@@ -77,11 +76,5 @@ namespace JacobEbey.RobotCleaner.Math
         }
         
         public static Vector2 operator +(Vector2 v1, Vector2 v2) => new Vector2(v1.X + v2.X, v1.Y + v2.Y);
-
-        public static Vector2 operator +(Vector2 v1, int v2) => new Vector2(v1.X + v2, v1.Y + v2);
-
-        public static Vector2 operator -(Vector2 v1, Vector2 v2) => new Vector2(v1.X - v2.X, v1.Y - v2.Y);
-
-        public static Vector2 operator -(Vector2 v1, int v2) => new Vector2(v1.X - v2, v1.Y - v2);
     }
 }

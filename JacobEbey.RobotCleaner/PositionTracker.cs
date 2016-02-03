@@ -15,8 +15,6 @@ namespace JacobEbey.RobotCleaner
         Robot robot;
         Vector2 initialPosition;
 
-        Vector2 boundsLow, boundsHigh;
-
         Queue<Vector2> moves = new Queue<Vector2>();
 
         /// <summary>
@@ -31,9 +29,6 @@ namespace JacobEbey.RobotCleaner
 
             initialPosition = this.robot.Position;
 
-            boundsLow = initialPosition;
-            boundsHigh = initialPosition;
-
             this.robot.Moved += OnRobotMoved;
         }
 
@@ -45,27 +40,42 @@ namespace JacobEbey.RobotCleaner
         {
             lock (moves)
             {
+                // If we have not moved then we have only visited one location i.e the initial position.
                 if (moves.Count <= 0) return 1;
 
+                // Create a cache to store the positions we've visited.
+                // For a quick and dirty solution I've decided to go with
+                // using the hash code of the positions formated as "({X},{Y})"
+                // as the key in the dictionary and just doing a lookup along
+                // the path the robot has moved.
                 Dictionary<int, bool> positionsVisitedCache = new Dictionary<int, bool>();
 
+                // This will be the resulting positions visited.
                 int count = 0;
 
+                // Start at the initial position and foreach move that was made,
+                // check if each position along the move has been visited.
                 Vector2 currentPosition = initialPosition;
                 foreach (var move in moves)
                 {
                     var lastPosition = currentPosition;
                     foreach (var position in PositionsAlongMove(currentPosition, move))
                     {
+                        // Get if the current position has been visited.
                         bool visited = false;
-                        positionsVisitedCache.TryGetValue(position.GetHashCode(), out visited);
+                        positionsVisitedCache.TryGetValue(position.ToString().GetHashCode(), out visited);
+
+                        // If this is the first time at this position, increment the count.
                         if (!visited)
                             count++;
 
-                        positionsVisitedCache[position.GetHashCode()] = true;
+                        // Store that we've visited this position as to not cound it again.
+                        positionsVisitedCache[position.ToString().GetHashCode()] = true;
 
+                        // Store the last position.
                         lastPosition = position;
                     }
+                    // Store the current position after the moves.
                     currentPosition = lastPosition;
                 }
 
@@ -74,7 +84,7 @@ namespace JacobEbey.RobotCleaner
         }
 
         /// <summary>
-        /// Get points along the move command.
+        /// Get points along the move command. (Quick and dirty)
         /// </summary>
         /// <param name="currentPosition">The current position to move from.</param>
         /// <param name="move">The direction to move.</param>

@@ -4,9 +4,15 @@ using JacobEbey.RobotCleaner.Math;
 
 namespace JacobEbey.RobotCleaner.Tests.Math
 {
+    /// <summary>
+    /// The test fixture for <see cref="JacobEbey.RobotCleaner.Math.Vector2"/>.
+    /// </summary>
     [TestClass]
     public class Vector2Tests
     {
+        /// <summary>
+        /// Verify that the vector is created correctly.
+        /// </summary>
         [TestMethod]
         public void TestVector2Creation()
         {
@@ -15,6 +21,9 @@ namespace JacobEbey.RobotCleaner.Tests.Math
             Assert.AreEqual(11, vector.Y);
         }
 
+        /// <summary>
+        /// Verify that vector addition works.
+        /// </summary>
         [TestMethod]
         public void TestVectorAddition()
         {
